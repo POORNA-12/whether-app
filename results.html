@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Results</title>
+    <style>
+       body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-position: center;
+}
+
+.weather-container {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+h1 {
+    margin-top: 0;
+}
+
+.weather-info {
+    font-size: 24px;
+}
+    </style>
+</head>
+<body>
+    <div class="weather-container">
+        <h1>Weather Information</h1>
+        <div class="weather-info">
+            <p>City: <span id="city"></span></p>
+            <p>Temperature: <span id="temperature"></span>°C</p>
+            <p>Humidity: <span id="humidity"></span>......</p>
+            <p>Wind Speed: <span id="wind-speed"></span>.....</p>
+            <p>Description: <span id="description"></span></p>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const city = urlParams.get('city');
+        const temperature = urlParams.get('temperature');
+        const humidity = urlParams.get('humidity');
+        const windSpeed = urlParams.get('windSpeed');
+        const description = urlParams.get('description');
+        document.getElementById('city').textContent = city;
+        document.getElementById('temperature').textContent = temperature;
+        document.getElementById('humidity').textContent = humidity;
+        document.getElementById('wind-speed').textContent = windSpeed;
+        document.getElementById('description').textContent = description;
+
+            function setBackground(description) {
+            let imageUrl;
+            switch (description.toLowerCase()) {
+                case 'clear':
+                    imageUrl = 'https://source.unsplash.com/1600x900/?clear-sky';
+                    break;
+                case 'clouds':
+                    imageUrl = 'https://source.unsplash.com/1600x900/?cloudy-sky';
+                    break;
+                case 'rain':
+                    imageUrl = 'https://source.unsplash.com/1600x900/?rainy-sky';
+                    break;
+                case 'drizzle':
+                    imageUrl = 'https://source.unsplash.com/1600x900/?drizzle';
+                    break;
+                case 'thunderstorm':
+                    imageUrl = 'https://source.unsplash.com/1600x900/?thunderstorm';
+                    break;
+                case 'snow':
+                    imageUrl = 'https://source.unsplash.com/1600x900/?snow';
+                    break;
+                default:
+                    imageUrl = 'https://source.unsplash.com/1600x900/?weather';
+                    break;
+            }
+            document.body.style.backgroundImage = `url('${imageUrl}')`;
+        }
+        setBackground(description);
+    </script>
+</body>
+</html>

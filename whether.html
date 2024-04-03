@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
     <style>
-       .title {
+        .title {
              position: fixed;
              top: 0;
              left: 0;
@@ -72,13 +72,6 @@
             <input type="text" id="cityInput" class="search-input" placeholder="Explore Global Weather: Find Your City's Forecast Here!">
             <button type="submit" class="search-button">Search</button>
         </form>
-
-        <div class="weather-details">
-            <p class="city"></p>
-            <p class="temp"></p>
-            <p class="humidity"></p>
-            <p class="wind"></p>
-        </div>
     </div>
 
     <script>
@@ -92,7 +85,6 @@
             const cityInput = document.getElementById('cityInput').value.trim();
             try {
                 const data = await fetchWeather(cityInput);
-                displayWeather(data);
                 navigateToResultPage(data);
             } catch (error) {
                 console.error('Error fetching weather data:', error);
@@ -106,17 +98,6 @@
                 throw new Error('Network response was not ok');
             }
             return response.json();
-        }
-    
-        function displayWeather(data) {
-            const { name, main, wind } = data;
-            const { temp, humidity } = main;
-            const { speed } = wind;
-    
-            document.querySelector(".city").textContent = name;
-            document.querySelector(".temp").textContent = `Temperature: ${Math.round(temp)}°C`;
-            document.querySelector(".humidity").textContent = `Humidity: ${humidity}%`;
-            document.querySelector(".wind").textContent = `Wind Speed: ${speed} km/h`;
         }
     
         function navigateToResultPage(data) {
